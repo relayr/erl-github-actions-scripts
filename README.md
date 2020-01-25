@@ -27,14 +27,14 @@ language: erlang
 otp_release:
   - 22.0
 before_script: cp .travis/rebar.config.script .
-script: ./travis/build.sh
+script: .travis/build.sh
 ```
 
 If you want to publish package to [Hex](https://hex.pm) e.g. when tag is created you should run `deploy.sh` script by adding the following configuration to your `.travis.yml`:
 ```
 deploy:
   provider: script
-  script: ./travis/deploy.sh
+  script: .travis/deploy.sh
   skip_cleanup: true
   on:
     tags: true
