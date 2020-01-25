@@ -30,7 +30,7 @@ before_script: cp .travis/rebar.config.script .
 script: .travis/build.sh
 ```
 
-If you want to publish package to [Hex](https://hex.pm) e.g. when tag is created you should run `deploy.sh` script by adding the following configuration to your `.travis.yml`:
+If you want to publish package to [Hex](https://hex.pm) e.g. when tag is created you should add `HEX_API_KEY` environment variable to Travis and run `deploy.sh` script by adding the following configuration to your `.travis.yml`:
 ```
 deploy:
   provider: script
