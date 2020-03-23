@@ -1,5 +1,7 @@
 # erl-github-actions
 
+![GitHub actions](https://raw.githubusercontent.com/github/explore/2c7e603b797535e5ad8b4beb575ab3b7354666e1/topics/actions/actions.png)
+
 This repository is a fork of https://github.com/relayr/erl-travis-scripts.
 
 ### Description
