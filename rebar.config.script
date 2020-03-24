@@ -1,4 +1,4 @@
-case os:getenv("TRAVIS") of
+case os:getenv("GITHUB_ACTIONS") of
   "true" ->
     Token = os:getenv("GITHUB_TOKEN"),
     CONFIG1 = lists:keystore(coveralls_repo_token, 1, CONFIG, {coveralls_repo_token, os:getenv("GITHUB_TOKEN")}),
