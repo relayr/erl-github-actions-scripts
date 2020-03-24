@@ -26,15 +26,17 @@ $ git submodule add https://github.com/relayr/erl-github-actions-scripts.git .gi
 
 Then you can make use of `rebar.config.script` by copying it to your project in `.github/workflows/*.yml` and execute customized scripts:
 
-##### .github/workflows/build.yml
+##### .github/workflows/ci.yml
 ```
-name: Erlang CI build
+name: Erlang CI
 
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -49,36 +51,14 @@ jobs:
     - name: Configure
       run: cp .github/scripts/rebar.config.script .
     - name: Build
+      run: .github/scripts/build.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: .github/scripts/build.sh
-```
-
-If you want to publish package to [Hex](https://hex.pm) e.g. when tag is created you should add `HEX_API_KEY` secret containing your own key to GitHub repository settings (https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets) and prepare the following GitHub actions workflow:
-
-##### .github/workflows/deploy.yml
-```
-name: Erlang CI deploy
-
-on:
-  push:
-    tags:
-      - *
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container:
-      image: erlang:22.0
-
-    steps:
-    - uses: actions/checkout@v1.0.0
-      with:
-        submodules: true
-    - name: Configure
-      run: cp .github/scripts/rebar.config.script .
-    - name: Deploy
+    - name: Publish
+      if: github.event_name == 'release' && github.event.action == 'published'
+      run: .github/scripts/publish.sh
       env:
         HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
-      run: .github/scripts/deploy.sh
 ```
+
+If you want to publish package to [Hex](https://hex.pm) e.g. when release is published you should add `HEX_API_KEY` secret containing your own key to GitHub repository settings (https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets).
