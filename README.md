@@ -42,9 +42,9 @@ jobs:
       image: erlang:22.0
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Initialize
-      run: git submodule update --init
+    - uses: actions/checkout@v1.0.0
+      with:
+        submodules: true
     - name: Configure
       run: cp .github/scripts/rebar.config.script .
     - name: Build
@@ -69,9 +69,9 @@ jobs:
       image: erlang:22.0
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Initialize
-      run: git submodule update --init
+    - uses: actions/checkout@v1.0.0
+      with:
+        submodules: true
     - name: Configure
       run: cp .github/scripts/rebar.config.script .
     - name: Deploy
