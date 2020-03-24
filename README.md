@@ -24,7 +24,8 @@ To use scripts from this repository in your Erlang application built in GitHub y
 $ git submodule add https://github.com/relayr/erl-github-actions-scripts.git .github/scripts
 ```
 
-Then you can make use of `rebar.config.script` by copying it to your project in `.github/workflows/*.yml` and execute customized `rebar3` commands:
+Then you can make use of `rebar.config.script` by copying it to your project in `.github/workflows/*.yml` and execute customized scripts:
+
 ##### .github/workflows/build.yml
 ```
 name: Erlang CI build
@@ -54,6 +55,8 @@ jobs:
 ```
 
 If you want to publish package to [Hex](https://hex.pm) e.g. when tag is created you should add `HEX_API_KEY` secret containing your own key to GitHub repository settings (https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets) and prepare the following GitHub actions workflow:
+
+##### .github/workflows/deploy.yml
 ```
 name: Erlang CI deploy
 
