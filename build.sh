@@ -3,7 +3,7 @@
 set -e
 
 rebar3 eunit --cover
-if [ "`rebar3 plugins list | grep -E '^rebar3_proper$'`" != "" ]; then
+if [ "`rebar3 plugins list | grep -E '^rebar3_proper'`" != "" ]; then
     rebar3 proper --cover
 fi
 
